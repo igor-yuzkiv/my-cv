@@ -1,3 +1,5 @@
+import { ERROR_ROUTE } from './constants.js'
+
 class Router {
     constructor(routeViewEl, routes, rootPath = '/') {
         this.routeViewEl = routeViewEl
@@ -7,7 +9,6 @@ class Router {
 
         this.handlePopstate = this.handlePopstate.bind(this)
         this.#init()
-        this.#renderPage()
     }
 
     get path() {
@@ -15,11 +16,12 @@ class Router {
     }
 
     get route() {
-        return this.routes.find((i) => i.path === this.path)
+        return this.routes.find((i) => i.path === this.path) || ERROR_ROUTE
     }
 
     #init() {
         addEventListener('popstate', this.handlePopstate)
+        this.#renderPage()
     }
 
     cleanup() {
