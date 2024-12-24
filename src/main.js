@@ -1,9 +1,11 @@
 import { createRouter } from './router.js'
+import { NAV_ITEMS } from './constants.js'
 
 const appEl = document.querySelector('#app')
 const routeViewEl = appEl.querySelector('.route-view')
+const navContainer = appEl.querySelector('.side-navigation nav table tbody')
 
-const router = createRouter(routeViewEl, [
+createRouter(routeViewEl, [
     {
         name: 'home',
         path: '/',
@@ -21,10 +23,15 @@ const router = createRouter(routeViewEl, [
     },
 ])
 
-appEl.querySelector('#navigate').addEventListener('click', () => {
-    router.push('experience')
-})
+function renderNavItems() {
+    navContainer.innerHTML = NAV_ITEMS.map((item) => {
+        const title = item.path ? `<a href="#${item.path}">${item.title}</a>` : item.title
+        return `<tr data-path="${item.path}">
+            <td>${title}</td>
+            <td>${item.size}</td>
+            <td>${item.modified_time}</td>
+        </tr>`
+    }).join('')
+}
 
-appEl.querySelector('#back').addEventListener('click', () => {
-    router.go(-1)
-})
+renderNavItems()

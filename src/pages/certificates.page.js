@@ -8,7 +8,7 @@ export class CertificatesPage extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `<div>
-            <h1>certificates.page.js</h1>
+            <p>certificates.page.js</p>
         </div>`
     }
 }

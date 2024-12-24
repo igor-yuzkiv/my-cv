@@ -1,25 +1,41 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Igor Yuzkiv | CV</title>
-    <link rel="stylesheet" href="styles/normalize.css"/>
-    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
 <main id="app">
-    <div class="navigation">
-        <a href="">home</a>
-        <a href="#/certificates">certificates</a>
-        <a href="#/experience">experience</a>
+    <nav class="top-navigation">
+        <ul class="nav-list">
+            <li>Files</li>
+            <li>Command</li>
+            <li>Options</li>
+            <li>Right</li>
+        </ul>
+    </nav>
 
-        <button id="navigate">navigate</button>
-        <button id="back">back</button>
-    </div>
-    <div class="route-view">
+    <div class="content">
+        <section class="panel side-navigation" data-breadcrumb="< ~/CV" tabindex="1">
+            <nav>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Size</th>
+                        <th>Modify time</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </nav>
+        </section>
 
+        <section class="panel route-view" tabindex="2"></section>
     </div>
 </main>
 <script src="src/main.js" type="module"></script>

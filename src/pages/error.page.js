@@ -8,7 +8,7 @@ export class ErrorPage extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `<div>
-            <h1>error.page.js</h1>
+            <p>error.page.js</p>
         </div>`
     }
 }

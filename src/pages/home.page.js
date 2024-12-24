@@ -8,7 +8,7 @@ export class HomePage extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `<div>
-            <h1>home.page.js</h1>
+            <p>home.page.js</h1>
         </div>`
     }
 }
