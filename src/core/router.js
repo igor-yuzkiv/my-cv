@@ -1,4 +1,4 @@
-import { ERROR_ROUTE } from './constants.js'
+import { ERROR_ROUTE } from '../constants.js'
 
 class Router {
     constructor(routeViewEl, routes) {
@@ -32,7 +32,7 @@ class Router {
             return this.routerCache.get(this.route.name)
         }
 
-        await import(this.route.component)
+        await import(new URL(this.route.component, import.meta.url))
         const component = document.createElement(`${this.route.name}-page`)
         this.routerCache.set(this.route.name, component)
 
@@ -55,7 +55,6 @@ class Router {
 
     push(path) {
         const route = this.routes.find((i) => i.path === path) || ERROR_ROUTE
-        console.log({ path, route })
         history.pushState(null, '', `#${route.path}`)
         this.#renderPage()
     }

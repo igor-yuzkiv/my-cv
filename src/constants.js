@@ -31,7 +31,7 @@ export const NAV_ITEMS = [
     },
     {
         title: 'todo.txt',
-        path: '/certificates',
+        path: '/todo',
         size: '∞',
         modified_time: 'Jan 12 16:00',
     },
