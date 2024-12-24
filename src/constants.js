@@ -24,8 +24,8 @@ export const NAV_ITEMS = [
         modified_time: 'Jan 12 16:00',
     },
     {
-        title: 'certificates.pdf',
-        path: '/certificates',
+        title: 'vue-certificate.jpg',
+        path: '/vue-certificate',
         size: '1',
         modified_time: 'Jan 12 16:00',
     },

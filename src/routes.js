@@ -7,9 +7,9 @@ export const router = createRouter(document.querySelector('#app .route-view'), [
         component: '/src/pages/home.page.js',
     },
     {
-        name: 'certificates',
-        path: '/certificates',
-        component: '/src/pages/certificates.page.js',
+        name: 'vue-certificate',
+        path: '/vue-certificate',
+        component: '/src/pages/vue-certificate.page.js',
     },
     {
         name: 'experience',
