@@ -50,8 +50,14 @@ class Router {
         this.#renderPage()
     }
 
-    push() {
-        history.pushState(null, '', '#/path')
+    push(routeName) {
+        const route = this.routes.find((i) => i.name === routeName) || ERROR_ROUTE
+        history.pushState(null, '', `#${route.path}`)
+        this.#renderPage()
+    }
+
+    go(delta) {
+        history.go(delta)
     }
 }
 

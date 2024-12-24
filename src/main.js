@@ -3,7 +3,7 @@ import { createRouter } from './router.js'
 const appEl = document.querySelector('#app')
 const routeViewEl = appEl.querySelector('.route-view')
 
-createRouter(routeViewEl, [
+const router = createRouter(routeViewEl, [
     {
         name: 'home',
         path: '/',
@@ -20,3 +20,11 @@ createRouter(routeViewEl, [
         component: './pages/experience.page.js',
     },
 ])
+
+appEl.querySelector('#navigate').addEventListener('click', () => {
+    router.push('experience')
+})
+
+appEl.querySelector('#back').addEventListener('click', () => {
+    router.go(-1)
+})

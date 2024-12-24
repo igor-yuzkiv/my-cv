@@ -1,6 +1,8 @@
 export class ErrorPage extends HTMLElement {
     connectedCallback() {
-        this.attachShadow({ mode: 'open' })
+        if (!this.shadowRoot) {
+            this.attachShadow({ mode: 'open' })
+        }
         this.render()
     }
 
