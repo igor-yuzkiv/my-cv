@@ -1,25 +1,24 @@
 import { ERROR_ROUTE } from './constants.js'
 
 class Router {
-    constructor(routeViewEl, routes, rootPath = '/') {
+    constructor(routeViewEl, routes) {
         this.routeViewEl = routeViewEl
-        this.rootPath = rootPath
         this.routes = routes
         this.routerCache = new Map()
+        this.onRouteChange = null
 
         this.handlePopstate = this.handlePopstate.bind(this)
-        this.#init()
     }
 
     get path() {
-        return window.location.hash.replace('#', '') || this.rootPath
+        return window.location.hash.replace('#', '') || '/'
     }
 
     get route() {
         return this.routes.find((i) => i.path === this.path) || ERROR_ROUTE
     }
 
-    #init() {
+    init() {
         addEventListener('popstate', this.handlePopstate)
         this.#renderPage()
     }
@@ -44,14 +43,19 @@ class Router {
         const component = await this.#getPageComponent()
         this.routeViewEl.innerHTML = ''
         this.routeViewEl.appendChild(component)
+
+        if (this.onRouteChange) {
+            this.onRouteChange(this.route)
+        }
     }
 
     handlePopstate() {
         this.#renderPage()
     }
 
-    push(routeName) {
-        const route = this.routes.find((i) => i.name === routeName) || ERROR_ROUTE
+    push(path) {
+        const route = this.routes.find((i) => i.path === path) || ERROR_ROUTE
+        console.log({ path, route })
         history.pushState(null, '', `#${route.path}`)
         this.#renderPage()
     }

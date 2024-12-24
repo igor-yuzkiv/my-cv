@@ -5,7 +5,7 @@ const appEl = document.querySelector('#app')
 const routeViewEl = appEl.querySelector('.route-view')
 const navContainer = appEl.querySelector('.side-navigation nav table tbody')
 
-createRouter(routeViewEl, [
+const router = createRouter(routeViewEl, [
     {
         name: 'home',
         path: '/',
@@ -24,14 +24,41 @@ createRouter(routeViewEl, [
 ])
 
 function renderNavItems() {
-    navContainer.innerHTML = NAV_ITEMS.map((item) => {
-        const title = item.path ? `<a href="#${item.path}">${item.title}</a>` : item.title
-        return `<tr data-path="${item.path}">
-            <td>${title}</td>
+    navContainer.innerHTML = ''
+
+    NAV_ITEMS.forEach((item) => {
+        const tr = document.createElement('tr')
+        if (item.path) {
+            tr.setAttribute('data-path', item.path)
+        }
+
+        tr.innerHTML = `
+            <td>${item.title}</td>
             <td>${item.size}</td>
             <td>${item.modified_time}</td>
-        </tr>`
-    }).join('')
+        `
+
+        navContainer.appendChild(tr)
+    })
 }
 
+router.onRouteChange = (route) => {
+    navContainer.querySelectorAll('tr').forEach((tr) => {
+        const path = tr.getAttribute('data-path')
+        path === route.path ? tr.classList.add('active') : tr.classList.remove('active')
+    })
+}
+
+navContainer.addEventListener('click', (event) => {
+    const tr = event.target.closest('tr')
+    if (!tr) {
+        return
+    }
+    const path = tr.getAttribute('data-path')
+    if (path) {
+        router.push(path)
+    }
+})
+
 renderNavItems()
+router.init()
