@@ -1,4 +1,4 @@
-import { Router } from './core/router.js'
+import { Router } from './router.js'
 import { ROUTES } from './constants.js'
 
 const navContainerEl = document.querySelector('#app .side-navigation')
