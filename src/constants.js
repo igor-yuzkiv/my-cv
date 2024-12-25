@@ -1,38 +1,62 @@
-export const ERROR_ROUTE = {
-    name: 'error',
-    path: '/error',
-    component: './pages/error.page.js',
-}
-
-export const NAV_ITEMS = [
+export const ROUTES = [
     {
-        title: '../',
-        path: '',
-        size: 'UP--DIR',
-        modified_time: 'Jan 12 16:00',
+        path: '/certificates',
+        meta: {
+            title: '/certificates',
+            size: '4096',
+            modified_time: 'Jan 12 16:00',
+        },
+        children: [
+            {
+                path: '/vue',
+                name: 'vue-certificate',
+                component: '/my-cv/src/pages/certificates/vue-certificate.page.js',
+                meta: {
+                    title: 'vue-certificate.pdf',
+                    size: '1 mb',
+                    modified_time: 'Jan 12 16:00',
+                },
+            },
+            {
+                path: '/english',
+                name: 'english-certificate',
+                component: '/my-cv/src/pages/certificates/english-certificate.page.js',
+                meta: {
+                    title: 'english-certificate.pdf',
+                    size: '1 mb',
+                    modified_time: 'Jan 12 16:00',
+                },
+            },
+        ],
     },
     {
-        title: 'greeting.txt',
         path: '/',
-        size: '3 KB',
-        modified_time: 'Jan 12 16:00',
+        name: 'home',
+        component: '/my-cv/src/pages/home.page.js',
+        meta: {
+            title: 'greeting.txt',
+            size: '160',
+            modified_time: 'Jan 12 16:00',
+        },
     },
     {
-        title: 'experience.txt',
         path: '/experience',
-        size: '4 year',
-        modified_time: 'Jan 12 16:00',
+        name: 'experience',
+        component: '/my-cv/src/pages/experience.page.js',
+        meta: {
+            title: 'experience.txt',
+            size: '4 year',
+            modified_time: 'Jan 12 16:00',
+        },
     },
     {
-        title: 'vue-certificate.jpg',
-        path: '/vue-certificate',
-        size: '1',
-        modified_time: 'Jan 12 16:00',
-    },
-    {
-        title: 'todo.txt',
         path: '/todo',
-        size: '∞',
-        modified_time: 'Jan 12 16:00',
+        name: 'todo',
+        component: '/my-cv/src/pages/todo.page.js',
+        meta: {
+            title: 'todo.txt',
+            size: '∞',
+            modified_time: 'Jan 12 16:00',
+        },
     },
 ]

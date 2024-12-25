@@ -1,45 +1,65 @@
-import { NAV_ITEMS } from './constants.js'
-import { router } from './routes.js'
+import { Router } from './core/router.js'
+import { ROUTES } from './constants.js'
 
-const appEl = document.querySelector('#app')
-const navContainer = appEl.querySelector('.side-navigation nav table tbody')
+const navContainerEl = document.querySelector('#app .side-navigation')
+const navBodyEl = navContainerEl.querySelector('tbody')
+const router = new Router(document.querySelector('#app .route-view'), ROUTES)
 
-function renderNavItems() {
-    navContainer.innerHTML = ''
+function renderNavItem(routes, path = '') {
+    console.log('renderNavItem', { routes, path })
+    navBodyEl.innerHTML = '<tr data-path="../"><td>../</td><td>UP--DIR</td><td>Jan 12 16:00</td></tr>'
 
-    NAV_ITEMS.forEach((item) => {
+    routes.forEach((route) => {
+        const { meta } = route || {}
+        if (!meta) {
+            return
+        }
+
+        const itemPath = `${route.parent}${route.path}`
+
         const tr = document.createElement('tr')
-        if (item.path) {
-            tr.setAttribute('data-path', item.path)
+        tr.setAttribute('data-path', itemPath)
+
+        if (itemPath === router.path) {
+            tr.classList.add('active')
         }
 
         tr.innerHTML = `
-            <td>${item.title}</td>
-            <td>${item.size}</td>
-            <td>${item.modified_time}</td>
+            <td>${meta.title}</td>
+            <td>${meta.size}</td>
+            <td>${meta.modified_time}</td>
         `
 
-        navContainer.appendChild(tr)
+        navBodyEl.appendChild(tr)
     })
 }
 
-router.onRouteChange = (route) => {
-    navContainer.querySelectorAll('tr').forEach((tr) => {
-        const path = tr.getAttribute('data-path')
-        path === route.path ? tr.classList.add('active') : tr.classList.remove('active')
-    })
-}
+router.subscribe(() => {
+    if (router.parent) {
+        renderNavItem(router.children, router.parent.path)
+        return
+    }
 
-navContainer.addEventListener('click', (event) => {
+    if (router.currentRoute?.children?.length) {
+        renderNavItem(router.currentRoute.children, router.currentRoute.path)
+    } else {
+        renderNavItem(router.routes)
+    }
+})
+
+navContainerEl.addEventListener('click', (event) => {
     const tr = event.target.closest('tr')
     if (!tr) {
         return
     }
+
     const path = tr.getAttribute('data-path')
-    if (path) {
+
+    if (path === '../') {
+        router.push(router.parent?.path || '/')
+    } else {
         router.push(path)
     }
 })
 
-renderNavItems()
 router.init()

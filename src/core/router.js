@@ -1,69 +1,124 @@
-import { ERROR_ROUTE } from '../constants.js'
+const ERROR_ROUTE = {
+    name: 'error',
+    path: '/error',
+    component: '/my-cv/src/pages/error.page.js',
+}
 
-class Router {
+export class Router {
     constructor(routeViewEl, routes) {
         this.routeViewEl = routeViewEl
         this.routes = routes
-        this.routerCache = new Map()
-        this.onRouteChange = null
+        this.routesMap = new Map()
+        this.listeners = new Set()
+        this.pagesCache = new Map()
+
+        this.createRouteMap(routes)
 
         this.handlePopstate = this.handlePopstate.bind(this)
     }
 
     get path() {
-        return window.location.hash.replace('#', '') || '/'
+        return window.location.hash.replace('#', '')
     }
 
-    get route() {
-        return this.routes.find((i) => i.path === this.path) || ERROR_ROUTE
+    get breadcrumbs() {
+        return this.path.split('/').filter(Boolean)
     }
 
-    init() {
-        addEventListener('popstate', this.handlePopstate)
-        this.#renderPage()
-    }
-
-    cleanup() {
-        removeEventListener('popstate', this.handlePopstate)
-    }
-
-    async #getPageComponent() {
-        if (this.routerCache.has(this.route.name)) {
-            return this.routerCache.get(this.route.name)
+    get currentRoute() {
+        if (!this.path) {
+            return this.routesMap.get('/')
         }
 
-        await import(new URL(this.route.component, import.meta.url))
-        const component = document.createElement(`${this.route.name}-page`)
-        this.routerCache.set(this.route.name, component)
+        return this.routesMap.get(this.path) || ERROR_ROUTE
+    }
+
+    get parent() {
+        return this.currentRoute?.parent
+    }
+
+    get children() {
+        if (!this.parent) {
+            return []
+        }
+
+        return Array.from(this.routesMap.values()).filter((route) => route.parent === this.parent)
+    }
+
+    async init() {
+        addEventListener('popstate', this.handlePopstate)
+        await this.navigate()
+    }
+
+    handlePopstate() {
+        this.navigate().catch(console.error)
+    }
+
+    createRouteMap(items, path = '') {
+        for (const item of items) {
+            const key = path ? `${path}${item.path}` : item.path
+            item.parent = path
+
+            if (this.routesMap.has(key)) {
+                throw new Error(`Route already exists: ${key}`)
+            }
+
+            this.routesMap.set(key, item)
+
+            if (item.children) {
+                this.createRouteMap(item.children, item.path)
+            }
+        }
+    }
+
+    async getPageComponent() {
+        if (!this.currentRoute) {
+            return ERROR_ROUTE
+        }
+
+        if (this.pagesCache.has(this.currentRoute.path)) {
+            return this.pagesCache.get(this.currentRoute.path)
+        }
+
+        if (!this.currentRoute?.component) {
+            return null
+        }
+
+        await import(new URL(this.currentRoute.component, import.meta.url))
+        const component = document.createElement(`${this.currentRoute.name}-page`)
+
+        this.pagesCache.set(this.currentRoute.path, component)
 
         return component
     }
 
-    async #renderPage() {
-        const component = await this.#getPageComponent()
+    async navigate() {
         this.routeViewEl.innerHTML = ''
-        this.routeViewEl.appendChild(component)
 
-        if (this.onRouteChange) {
-            this.onRouteChange(this.route)
+        const component = await this.getPageComponent()
+        if (component) {
+            this.routeViewEl.appendChild(component)
         }
+
+        this.listeners.forEach((listener) => listener(this.currentRoute))
     }
 
-    handlePopstate() {
-        this.#renderPage()
+    subscribe(listener) {
+        this.listeners.add(listener)
+    }
+
+    unsubscribe(listener) {
+        this.listeners.delete(listener)
     }
 
     push(path) {
-        const route = this.routes.find((i) => i.path === path) || ERROR_ROUTE
-        history.pushState(null, '', `#${route.path}`)
-        this.#renderPage()
+        if (this.currentRoute.path !== path) {
+            history.pushState(null, '', `#${path}`)
+            this.navigate()
+        }
     }
 
     go(delta) {
         history.go(delta)
     }
-}
-
-export function createRouter(routeViewEl, routes) {
-    return new Router(routeViewEl, routes)
 }
