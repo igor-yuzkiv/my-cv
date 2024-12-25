@@ -59,4 +59,14 @@ export const ROUTES = [
             modified_time: 'Jan 12 16:00',
         },
     },
+    {
+        path: '/readme',
+        name: 'readme',
+        component: '/my-cv/src/pages/readme.page.js',
+        meta: {
+            title: 'README.md',
+            size: '3 kb',
+            modified_time: 'Jan 12 16:00',
+        },
+    },
 ]
