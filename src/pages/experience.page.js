@@ -8,7 +8,7 @@ export class ExperiencePage extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `<div>
-            <p>experience.page.js</h1>
+            <p>In progress...</h1>
         </div>`
     }
 }

@@ -1,4 +1,4 @@
-export class TodoPage extends HTMLElement {
+export class SkillsPage extends HTMLElement {
     connectedCallback() {
         if (!this.shadowRoot) {
             this.attachShadow({ mode: 'open' })
@@ -8,9 +8,9 @@ export class TodoPage extends HTMLElement {
 
     render() {
         this.shadowRoot.innerHTML = `<div>
-            <p>todo.page.js</h1>
+            <p>In progress...</h1>
         </div>`
     }
 }
 
-customElements.define('todo-page', TodoPage)
+customElements.define('skills-page', SkillsPage)

@@ -40,6 +40,14 @@ body {
     height: 100vh;
 }
 
+a {
+    all: unset;
+    display: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    cursor: inherit;
+}
+
 #app {
     display: flex;
     flex-direction: column;
@@ -55,20 +63,28 @@ body {
     overflow: hidden;
 }
 
-.top-navigation .nav-list {
+.top-navigation {
     display: flex;
-    gap: 30px;
-    padding: 0 10px;
-    margin: 0;
-    list-style-type: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     background-color: var(--green);
     color: var(--black);
+    padding-right: 10px;
 
-    & li {
-        cursor: pointer;
+    & .nav-list {
+        display: flex;
+        gap: 30px;
+        padding: 0 10px;
+        margin: 0;
+        list-style-type: none;
 
-        &:hover {
-            text-decoration: underline;
+        & li {
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }

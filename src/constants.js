@@ -50,12 +50,12 @@ export const ROUTES = [
         },
     },
     {
-        path: '/todo',
-        name: 'todo',
-        component: '/my-cv/src/pages/todo.page.js',
+        path: '/skills',
+        name: 'skills',
+        component: '/my-cv/src/pages/skills.page.js',
         meta: {
-            title: 'todo.txt',
-            size: '∞',
+            title: 'skills.txt',
+            size: '3 kb',
             modified_time: 'Jan 12 16:00',
         },
     },

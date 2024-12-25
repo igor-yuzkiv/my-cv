@@ -17,8 +17,7 @@ export class EnglishCertificatePage extends HTMLElement {
                     height: 100%;
                 }
             </style>
-            
-            <img width="90%" src="https://api.certificates.dev/certificates/thumbnail/9ca58b90-febc-4c50-911f-a84fa06b6496.jpg" alt="Vue.js Certificate" />
+            <img width="90%" src="https://lh3.googleusercontent.com/d/1lCH6Modz2rsGHUAKELMZ-c8B27eUXvLe" alt="English Certificate" />
         `
     }
 }
