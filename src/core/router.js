@@ -8,10 +8,10 @@ export class Router {
     constructor(routeViewEl, routes) {
         this.routeViewEl = routeViewEl
         this.routes = routes
-        this.routesMap = new Map()
         this.listeners = new Set()
         this.pagesCache = new Map()
 
+        this.routesMap = new Map()
         this.createRouteMap(routes)
 
         this.handlePopstate = this.handlePopstate.bind(this)
@@ -22,7 +22,7 @@ export class Router {
     }
 
     get breadcrumbs() {
-        return this.path.split('/').filter(Boolean)
+        return this.routesMap.has(this.path) ? this.path.split('/').filter(Boolean) : []
     }
 
     get currentRoute() {
@@ -33,16 +33,16 @@ export class Router {
         return this.routesMap.get(this.path) || ERROR_ROUTE
     }
 
-    get parent() {
+    get parentPath() {
         return this.currentRoute?.parent
     }
 
-    get children() {
-        if (!this.parent) {
+    get siblings() {
+        if (!this.parentPath) {
             return []
         }
 
-        return Array.from(this.routesMap.values()).filter((route) => route.parent === this.parent)
+        return Array.from(this.routesMap.values()).filter((route) => route.parent === this.parentPath)
     }
 
     async init() {
@@ -116,9 +116,5 @@ export class Router {
             history.pushState(null, '', `#${path}`)
             this.navigate()
         }
-    }
-
-    go(delta) {
-        history.go(delta)
     }
 }
