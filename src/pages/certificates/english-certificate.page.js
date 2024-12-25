@@ -17,7 +17,7 @@ export class EnglishCertificatePage extends HTMLElement {
                     height: 100%;
                 }
             </style>
-            <img width="90%" src="https://lh3.googleusercontent.com/d/1lCH6Modz2rsGHUAKELMZ-c8B27eUXvLe" alt="English Certificate" />
+            <img height="90%" src="https://lh3.googleusercontent.com/d/1lCH6Modz2rsGHUAKELMZ-c8B27eUXvLe" alt="English Certificate" />
         `
     }
 }
