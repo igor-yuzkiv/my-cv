@@ -23,11 +23,7 @@ function renderNavItems(routes) {
             tr.classList.add('active')
         }
 
-        tr.innerHTML = `
-            <td>${meta.title}</td>
-            <td>${meta.size}</td>
-            <td>${meta.modified_time}</td>
-        `
+        tr.innerHTML = `<td>${meta.title}</td><td>${meta.size}</td><td>${meta.modified_time}</td>`
 
         navBodyEl.appendChild(tr)
     })

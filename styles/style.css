@@ -27,7 +27,7 @@
 
 html {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     font-family: 'Courier New', Courier, monospace;
     box-sizing: border-box;
 }
@@ -71,6 +71,7 @@ a {
     background-color: var(--green);
     color: var(--black);
     padding-right: 10px;
+    font-weight: 600;
 
     & .nav-list {
         display: flex;
@@ -123,16 +124,12 @@ a {
     min-width: 35%;
 }
 
-.side-navigation nav {
-    flex: 1;
-    padding: 15px 5px 5px 5px;
-}
-
-.side-navigation nav table {
+.side-navigation table {
     width: 100%;
     border-collapse: collapse;
     white-space: nowrap;
     overflow: hidden;
+    font-weight: 600;
 
     & thead {
         color: var(--gold);
@@ -172,4 +169,23 @@ a {
     display: flex;
     overflow: auto;
     padding: 5px;
+}
+
+.card {
+    position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid white;
+    padding: 20px 10px 10px 10px;
+}
+
+.card:before {
+    position:absolute;
+    content: attr(data-subject);
+    background: var(--primary);
+    top: -10px;
+    padding: 0 10px;
+    font-size: 18px;
+    font-weight: 600;
 }
