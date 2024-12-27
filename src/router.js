@@ -10,10 +10,9 @@ export class Router {
         this.routes = routes
         this.listeners = new Set()
         this.pagesCache = new Map()
-
         this.routesMap = new Map()
-        this.createRouteMap(routes)
 
+        this.createRouteMap(routes)
         this.handlePopstate = this.handlePopstate.bind(this)
     }
 
