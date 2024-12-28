@@ -12,8 +12,8 @@ export const ROUTES = [
                 name: 'vue-certificate',
                 component: '/my-cv/src/pages/certificates/vue-certificate.page.js',
                 meta: {
-                    title: 'vue-certificate.pdf',
-                    size: '1 mb',
+                    title: 'vue.pdf',
+                    size: '3214',
                     modified_time: 'Jan 12 16:00',
                 },
             },
@@ -22,8 +22,8 @@ export const ROUTES = [
                 name: 'english-certificate',
                 component: '/my-cv/src/pages/certificates/english-certificate.page.js',
                 meta: {
-                    title: 'english-certificate.pdf',
-                    size: '1 mb',
+                    title: 'english.pdf',
+                    size: '1032',
                     modified_time: 'Jan 12 16:00',
                 },
             },
@@ -55,7 +55,7 @@ export const ROUTES = [
         component: '/my-cv/src/pages/skills.page.js',
         meta: {
             title: 'skills.txt',
-            size: '3 kb',
+            size: '4096',
             modified_time: 'Jan 12 16:00',
         },
     },
@@ -65,7 +65,7 @@ export const ROUTES = [
         component: '/my-cv/src/pages/readme.page.js',
         meta: {
             title: 'README.md',
-            size: '3 kb',
+            size: '1032',
             modified_time: 'Jan 12 16:00',
         },
     },

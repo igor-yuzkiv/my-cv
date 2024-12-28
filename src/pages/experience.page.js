@@ -9,8 +9,8 @@ export class ExperiencePage extends HTMLElement {
                 <div class="card legend" data-subject="Legend">
                     <div class="legend-items">
                         <span style="background: #09c405;">Work as a Developer</span>
+                        <span style="background: #5c5b50;">Partially Related Work</span>
                         <span style="background: #e0bc06;">Education</span>
-                        <span style="background: #5c5b50;">Non-Development or Partially Related Work</span>
                     </div>
                 </div>
                 <div class="tree">
