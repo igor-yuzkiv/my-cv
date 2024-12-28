@@ -18,7 +18,7 @@ export class VueCertificatePage extends HTMLElement {
                 }
             </style>
             
-            <img height="90%" src="https://api.certificates.dev/certificates/thumbnail/9ca58b90-febc-4c50-911f-a84fa06b6496.jpg" alt="Vue.js Certificate" />
+            <img width="90%" src="https://api.certificates.dev/certificates/thumbnail/9ca58b90-febc-4c50-911f-a84fa06b6496.jpg" alt="Vue.js Certificate" />
         `
     }
 }

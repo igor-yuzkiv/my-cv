@@ -40,10 +40,10 @@ function setBreadcrumb() {
 }
 
 router.subscribe(() => {
-    renderNavItems(
-        router.currentRoute?.children?.length ? router.currentRoute.children : router.siblings,
-        router.parentPath || '/'
-    )
+    const isFile = Boolean(router.currentRoute?.component)
+    let upDir = isFile ? router.routesMap.get(router.parentPath)?.parent : router.parentPath
+
+    renderNavItems(router.currentRoute?.children?.length ? router.currentRoute.children : router.siblings, upDir || '/')
     setBreadcrumb()
 })
 
