@@ -9,9 +9,6 @@ export class HomePage extends HTMLElement {
                 .page {
                     padding: 20px;
                 }
-                .page-content {
-                    text-align: justify;
-                }
                 .page .my-photo {
                     margin: 20px auto;
                     text-align: center;
@@ -29,7 +26,7 @@ export class HomePage extends HTMLElement {
                 <div class="my-photo">
                     <img src="https://lh3.googleusercontent.com/d/1mDVjcY1fe4br57fAFtwPq8h8QtBYlNWJ" alt="Ihor Yuzkiv" width="200" height="200">
                 </div>
-                <div class="page-content">
+                <div>
                     <h3>Hello, and welcome to my CV!</h3>
                     <p>My name is Ihor Yuzkiv, and I am a Full Stack Developer from Ukraine. With a passion for creating efficient and user-friendly solutions, I specialize in building robust applications that bridge the gap between innovative ideas and seamless user experiences.</p>
                     <p>I have experience working with various modern technologies and frameworks, focusing on both frontend and backend development. My work reflects my commitment to continuous learning and staying up-to-date with the latest trends in software development.</p>
