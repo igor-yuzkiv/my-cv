@@ -188,3 +188,66 @@ a {
     font-size: 18px;
     font-weight: 600;
 }
+
+.legend {
+    font-size: 16px;
+    margin-bottom: 25px;
+
+    & .legend-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+
+        & span {
+            padding: 2px 4px;
+            font-weight: bold;
+        }
+    }
+}
+
+.tree, .tree ul, .tree li {
+    position: relative;
+}
+
+.tree ul {
+    list-style: none;
+    padding-left: 32px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.tree li::before, .tree li::after {
+    content: "";
+    position: absolute;
+    left: -12px;
+}
+
+.tree li::before {
+    border-top: 2px solid #ffffff;
+    top: 9px;
+    width: 8px;
+    height: 0;
+}
+
+.tree li::after {
+    border-left: 2px solid #ffffff;
+    height: 100%;
+    width: 0;
+    top: 2px;
+}
+
+.tree ul > li:last-child::after {
+    height: 8px;
+}
+
+.tree .title {
+    font-weight: bold;
+}
+
+.tree .description {
+    padding: 5px 0 5px 16px ;
+    color: #eaeaea;
+    font-size: 14px;
+}

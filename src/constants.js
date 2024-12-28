@@ -60,16 +60,6 @@ export const ROUTES = [
         },
     },
     {
-        path: '/contacts',
-        name: 'contacts',
-        component: '/my-cv/src/pages/contacts.page.js',
-        meta: {
-            title: 'contacts.txt',
-            size: '4 year',
-            modified_time: 'Jan 12 16:00',
-        },
-    },
-    {
         path: '/readme',
         name: 'readme',
         component: '/my-cv/src/pages/readme.page.js',

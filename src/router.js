@@ -7,7 +7,6 @@ const ERROR_ROUTE = {
 export class Router {
     constructor(routeViewEl, routes) {
         this.routeViewEl = routeViewEl
-        this.routes = routes
         this.listeners = new Set()
         this.pagesCache = new Map()
         this.routesMap = new Map()
@@ -17,7 +16,7 @@ export class Router {
     }
 
     get path() {
-        return window.location.hash.replace('#', '')
+        return window.location.hash.replace('#', '') || '/'
     }
 
     get breadcrumbs() {
@@ -37,10 +36,6 @@ export class Router {
     }
 
     get siblings() {
-        if (!this.parentPath) {
-            return []
-        }
-
         return Array.from(this.routesMap.values()).filter((route) => route.parent === this.parentPath)
     }
 
@@ -65,7 +60,7 @@ export class Router {
             this.routesMap.set(key, item)
 
             if (item.children) {
-                this.createRouteMap(item.children, item.path)
+                this.createRouteMap(item.children, key)
             }
         }
     }

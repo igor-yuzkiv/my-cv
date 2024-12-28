@@ -5,8 +5,8 @@ const navContainerEl = document.querySelector('#app .side-navigation')
 const navBodyEl = navContainerEl.querySelector('tbody')
 const router = new Router(document.querySelector('#app .route-view'), ROUTES)
 
-function renderNavItems(routes) {
-    navBodyEl.innerHTML = '<tr data-path="../"><td>../</td><td>UP--DIR</td><td>Jan 12 16:00</td></tr>'
+function renderNavItems(routes, upDir = '/') {
+    navBodyEl.innerHTML = `<tr data-path="${upDir}"><td>../</td><td>UP--DIR</td><td>Jan 12 16:00</td></tr>`
 
     routes.forEach((route) => {
         const { meta } = route || {}
@@ -15,8 +15,8 @@ function renderNavItems(routes) {
         }
 
         const itemPath = `${route.parent}${route.path}`
-
         const tr = document.createElement('tr')
+
         tr.setAttribute('data-path', itemPath)
 
         if (itemPath === router.path) {
@@ -40,32 +40,17 @@ function setBreadcrumb() {
 }
 
 router.subscribe(() => {
-    if (router.parentPath) {
-        renderNavItems(router.siblings, router.parentPath.path)
-        return
-    }
-
-    if (router.currentRoute?.children?.length) {
-        renderNavItems(router.currentRoute.children, router.currentRoute.path)
-    } else {
-        renderNavItems(router.routes)
-    }
-
+    renderNavItems(
+        router.currentRoute?.children?.length ? router.currentRoute.children : router.siblings,
+        router.parentPath || '/'
+    )
     setBreadcrumb()
 })
 
 navContainerEl.addEventListener('click', (event) => {
     const tr = event.target.closest('tr')
-    if (!tr) {
-        return
-    }
-
-    const path = tr.getAttribute('data-path')
-
-    if (path === '../') {
-        router.push(router.parentPath?.path || '/')
-    } else {
-        router.push(path)
+    if (tr) {
+        router.push(tr.getAttribute('data-path') || '/')
     }
 })
 

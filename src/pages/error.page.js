@@ -1,15 +1,14 @@
 export class ErrorPage extends HTMLElement {
     connectedCallback() {
-        if (!this.shadowRoot) {
-            this.attachShadow({ mode: 'open' })
-        }
         this.render()
     }
 
     render() {
-        this.shadowRoot.innerHTML = `<div>
-            <p>error.page.js</p>
-        </div>`
+        this.innerHTML = `
+        <div style="text-align: center;">
+            <p>Page not found</p>
+        </div>
+    `
     }
 }
 
